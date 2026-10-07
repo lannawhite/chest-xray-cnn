@@ -1,0 +1,11 @@
+# 原始中文命名 notebook（仓库使用英文命名的 chest_xray_cnn.ipynb）
+CNN胸片分类.ipynb
+
+# 数据集（体积过大，不入库；按 README 说明自行下载）
+dataset/
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
