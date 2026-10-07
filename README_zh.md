@@ -61,21 +61,38 @@ notebook 通过 `flow_from_directory` 直接读取 `dataset/train_dataset` 与 `
 
 ```
 chest-xray-cnn/
-├── chest_xray_cnn.ipynb     # 完整流程（仅代码；运行即可复现输出）
+├── chest_xray_cnn.ipynb     # 完整流程（探索性 notebook）
+├── model.py                 # build_model()：CNN 定义
+├── train.py                 # 端到端训练 -> models/best_model.keras + results/*.png
+├── predict.py               # 单图推理并输出置信度
 ├── dataset/                 # 不在仓库内——请自行添加（见上）
+├── models/                  # 不在仓库内——训练权重（已 gitignore）
+├── results/                 # 不在仓库内——绘图（已 gitignore）
 ├── requirements.txt
 └── README.md
 ```
 
 ## 快速开始
 
+**方式 A — 可运行脚本（推荐）：**
+
 ```bash
 pip install -r requirements.txt
 # 1. 按上面结构把数据放到 dataset/ 下
-# 2. 打开 notebook
+# 2. 训练（保存 models/best_model.keras 与 results/*.png）
+python train.py --data_root dataset
+# 3. 单图推理
+python predict.py --image path/to/xray.jpg
+```
+
+**方式 B — notebook（用于探索）：**
+
+```bash
 jupyter notebook chest_xray_cnn.ipynb
 # 运行全部单元格；末尾会打印测试准确率、训练曲线、分类报告和混淆矩阵
 ```
+
+> `train.py` / `predict.py` 使用**英文**图例，避开了仅 Windows 自带的 SimHei 字体，因此可跨平台运行。探索性 notebook 保留原有的中文图例。
 
 ## 效果
 

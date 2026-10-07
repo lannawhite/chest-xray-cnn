@@ -4,6 +4,10 @@ CNN胸片分类.ipynb
 # 数据集（体积过大，不入库；按 README 说明自行下载）
 dataset/
 
+# 训练产物（模型权重与绘图，不入库；可本地重新生成）
+models/
+results/
+
 # Python / Jupyter
 __pycache__/
 *.pyc

@@ -61,22 +61,39 @@ The notebook reads `dataset/train_dataset` and `dataset/test_dataset` directly v
 
 ```
 chest-xray-cnn/
-├── chest_xray_cnn.ipynb     # the full pipeline (code only; run to reproduce outputs)
+├── chest_xray_cnn.ipynb     # the full pipeline (exploratory notebook)
+├── model.py                 # build_model(): CNN definition
+├── train.py                 # end-to-end training -> models/best_model.keras + results/*.png
+├── predict.py               # single-image inference with confidence
 ├── dataset/                 # NOT in repo — add your own (see Dataset)
+├── models/                  # NOT in repo — trained weights (gitignored)
+├── results/                 # NOT in repo — plots (gitignored)
 ├── requirements.txt
 └── README.md
 ```
 
 ## Quick start
 
+**Option A — runnable scripts (recommended):**
+
 ```bash
 pip install -r requirements.txt
 # 1. put your data under dataset/ as shown above
-# 2. open the notebook
+# 2. train (saves models/best_model.keras and results/*.png)
+python train.py --data_root dataset
+# 3. infer a single image
+python predict.py --image path/to/xray.jpg
+```
+
+**Option B — the notebook (for exploration):**
+
+```bash
 jupyter notebook chest_xray_cnn.ipynb
 # run all cells; the final cells print test accuracy, a training curve,
 # a classification report and a confusion matrix
 ```
+
+> `train.py` / `predict.py` use **English** plot labels and avoid the Windows-only SimHei font, so they run cross-platform. The exploratory notebook keeps the original Chinese labels.
 
 ## Results
 
