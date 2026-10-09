@@ -1,5 +1,7 @@
 # 胸部 X 光片分类（CNN）
 
+[English](README.md) | [中文](README_zh.md)
+
 > 用 TensorFlow/Keras 搭建的三分类胸片分类器，类别为 **Normal / Covid / Pneumonia**。整个流程（数据增强、带早停的训练、评估、分类报告、混淆矩阵）都在这一个 notebook 里跑完。
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white)

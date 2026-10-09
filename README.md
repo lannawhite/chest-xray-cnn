@@ -1,5 +1,7 @@
 # Chest X-Ray Classification (CNN)
 
+[English](README.md) | [中文](README_zh.md)
+
 > A 3-class chest X-ray classifier built with TensorFlow/Keras — **Normal / Covid / Pneumonia**. The whole pipeline (data augmentation, training with early stopping, evaluation, classification report, confusion matrix) runs in one notebook.
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white)
