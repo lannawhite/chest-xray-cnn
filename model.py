@@ -8,7 +8,7 @@ import tensorflow as tf
 from tensorflow.keras import layers
 
 
-VALID_CLASS_NAMES = ["Normal", "Covid", "Pneumonia"]
+VALID_CLASS_NAMES = ["Normal", "Covid", "Viral Pneumonia"]
 IMG_SIZE = (224, 224)
 NUM_CLASSES = len(VALID_CLASS_NAMES)
 
@@ -21,7 +21,8 @@ def build_model(num_classes: int = NUM_CLASSES) -> tf.keras.Model:
     """
     model = tf.keras.Sequential(
         [
-            layers.Conv2D(32, (3, 3), activation="relu", input_shape=(*IMG_SIZE, 3)),
+            layers.Input(shape=(*IMG_SIZE,3)),
+            layers.Conv2D(32, (3, 3), activation="relu"),
             layers.MaxPooling2D((2, 2)),
             layers.Conv2D(64, (3, 3), activation="relu"),
             layers.MaxPooling2D((2, 2)),

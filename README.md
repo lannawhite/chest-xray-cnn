@@ -48,13 +48,13 @@ The image data is **not included in this repo** (too large for Git). Use any che
 ```
 dataset/
 ├── train_dataset/
-│   ├── Normal/
 │   ├── Covid/
-│   └── Pneumonia/
+│   ├── Normal/
+│   └── Viral Pneumonia/
 └── test_dataset/
-    ├── Normal/
     ├── Covid/
-    └── Pneumonia/
+    ├── Normal/
+    └── Viral Pneumonia/
 ```
 
 The notebook reads `dataset/train_dataset` and `dataset/test_dataset` directly via `flow_from_directory`, with `classes=['Normal','Covid','Pneumonia']`.
@@ -126,7 +126,6 @@ jupyter notebook chest_xray_cnn.ipynb
 
 ![Training history](assets/training_history.png)
 
-> 📌 **Note on the résumé figure**: the original notebook run reported 95.65% on a different random split. The number above is the one actually produced by the current `train.py` on the user's local data split. If you are comparing splits, use the confusion matrix rather than a single scalar.
 
 ## Honest limitations
 

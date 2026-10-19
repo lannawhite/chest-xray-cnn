@@ -9,30 +9,42 @@ Prints the predicted class and the confidence (softmax probability).
 
 import argparse
 import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2" #关掉INFO日志
+import warnings
+warnings.filterwarnings("ignore", message="Your `PyDataset` class should call")#关掉PyDataset警告
 
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image as keras_image
 
-from model import build_model, VALID_CLASS_NAMES, IMG_SIZE
+from model import VALID_CLASS_NAMES, IMG_SIZE
 
 
 def load_model_safe(model_path: str):
-    if os.path.exists(model_path):
-        return tf.keras.models.load_model(model_path)
-    raise FileNotFoundError(
-        f"Model not found at {model_path}. Run `python train.py` first "
-        "or pass --model with a trained .keras file."
-    )
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(
+            f"Model not found at {model_path}. Run `python train.py` first "
+            "or pass --model with a trained .keras file."
+        )
+    try:
+        return tf.keras.models.load_model(model_path, compile=False)
+    except Exception as e:
+        raise RuntimeError(
+            f"Failed to load model from {model_path}: {e}"
+        ) from e
 
 
 def predict_image(model, img_path: str) -> tuple[str, float, dict]:
     img = keras_image.load_img(img_path, target_size=IMG_SIZE)
     arr = keras_image.img_to_array(img) / 255.0
     arr = np.expand_dims(arr, axis=0)
-    probs = model.predict(arr, verbose=0)[0]
+    probs = model(arr, training=False).numpy()[0]
     idx = int(np.argmax(probs))
-    return VALID_CLASS_NAMES[idx], float(probs[idx]), dict(zip(VALID_CLASS_NAMES, probs))
+    return (
+        VALID_CLASS_NAMES[idx],
+        float(probs[idx]),
+        dict(zip(VALID_CLASS_NAMES, probs)),
+    )
 
 
 def main() -> None:
@@ -50,7 +62,7 @@ def main() -> None:
     print(f"Result: {label}  (confidence {conf:.2%})")
     print("Per-class probabilities:")
     for name, p in sorted(all_probs.items(), key=lambda kv: -kv[1]):
-        print(f"  {name:10s}: {p:.2%}")
+        print(f"  {name:15s}: {p:.2%}")
 
 
 if __name__ == "__main__":

@@ -48,13 +48,13 @@ EarlyStopping(monitor=val_accuracy, patience=5, restore_best_weights=True)
 ```
 dataset/
 ├── train_dataset/
-│   ├── Normal/
 │   ├── Covid/
-│   └── Pneumonia/
+│   ├── Normal/
+│   └── Viral Pneumonia/
 └── test_dataset/
-    ├── Normal/
     ├── Covid/
-    └── Pneumonia/
+    ├── Normal/
+    └── Viral Pneumonia/
 ```
 
 notebook 通过 `flow_from_directory` 直接读取 `dataset/train_dataset` 与 `dataset/test_dataset`，类别固定为 `['Normal','Covid','Pneumonia']`。
@@ -125,7 +125,6 @@ jupyter notebook chest_xray_cnn.ipynb
 
 ![训练曲线](assets/training_history.png)
 
-> 📌 **关于简历里的 95.65%**：原 notebook 在另一次随机划分上跑出 95.65%。上面这个数字是用户本地当前 `train.py` 在本地数据划分上实测得到的结果。比较不同划分时，建议看混淆矩阵而非单一标量。
 
 ## 诚实的局限性
 

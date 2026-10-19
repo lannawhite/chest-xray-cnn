@@ -20,6 +20,9 @@ the Windows-only SimHei font.
 
 import argparse
 import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+import warnings
+warnings.filterwarnings("ignore", message="Your `PyDataset` class should call")
 
 import numpy as np
 import matplotlib
