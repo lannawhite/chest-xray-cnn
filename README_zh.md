@@ -67,6 +67,7 @@ chest-xray-cnn/
 ├── model.py                 # build_model()：CNN 定义
 ├── train.py                 # 端到端训练 -> models/best_model.keras + results/*.png
 ├── predict.py               # 单图推理并输出置信度
+├── assets/                  # README 用图（混淆矩阵、训练曲线）
 ├── dataset/                 # 不在仓库内——请自行添加（见上）
 ├── models/                  # 不在仓库内——训练权重（已 gitignore）
 ├── results/                 # 不在仓库内——绘图（已 gitignore）
@@ -100,9 +101,31 @@ jupyter notebook chest_xray_cnn.ipynb
 
 | 模型 | 测试准确率 |
 |---|---|
-| 3 层卷积 CNN（本仓库） | **TODO —— 跑完填入**（简历标注约 95.65%；请用你的数据划分实测验证） |
+| 3 层卷积 CNN（本仓库） | **84.85%**（本地划分上 56/66） |
 
-> ⚠️ 简历里写的 95.65% 来自某个特定数据划分，**尚未在本仓库环境中复现验证**。请运行 notebook，把真实测得的数字填进 TODO 后再在任何地方引用。
+**混淆矩阵**（测试集 66 张图像）
+
+| | 预测 Normal | 预测 Covid | 预测 Pneumonia |
+|---|---|---|---|
+| **真实 Normal** | 20 | 0 | 0 |
+| **真实 Covid** | 1 | 23 | 2 |
+| **真实 Viral Pneumonia** | 7 | 0 | 13 |
+
+**每类指标**
+
+| 类别 | 精确率 | 召回率 | F1 |
+|---|---|---|---|
+| Normal | 71.4% | 100% | 83.3% |
+| Covid | 100% | 88.5% | 93.9% |
+| Pneumonia | 86.7% | 65.0% | 74.3% |
+
+![混淆矩阵](assets/confusion_matrix.png)
+
+**训练曲线**（约在 epoch 17 早停）
+
+![训练曲线](assets/training_history.png)
+
+> 📌 **关于简历里的 95.65%**：原 notebook 在另一次随机划分上跑出 95.65%。上面这个数字是用户本地当前 `train.py` 在本地数据划分上实测得到的结果。比较不同划分时，建议看混淆矩阵而非单一标量。
 
 ## 诚实的局限性
 

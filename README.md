@@ -67,6 +67,7 @@ chest-xray-cnn/
 ├── model.py                 # build_model(): CNN definition
 ├── train.py                 # end-to-end training -> models/best_model.keras + results/*.png
 ├── predict.py               # single-image inference with confidence
+├── assets/                  # README figures (confusion matrix, training curves)
 ├── dataset/                 # NOT in repo — add your own (see Dataset)
 ├── models/                  # NOT in repo — trained weights (gitignored)
 ├── results/                 # NOT in repo — plots (gitignored)
@@ -101,9 +102,31 @@ jupyter notebook chest_xray_cnn.ipynb
 
 | Model | Test accuracy |
 |---|---|
-| 3-block CNN (this repo) | **TODO — run and fill in** (résumé states ~95.65%; verify on your data split) |
+| 3-block CNN (this repo) | **84.85%** (56/66 on a local split) |
 
-> ⚠️ The 95.65% figure quoted in the résumé comes from a specific data split and has **not been re-verified in this repo's environment**. Run the notebook and replace the TODO with your measured number before citing it anywhere.
+**Confusion matrix** (test set, 66 images)
+
+| | Predicted Normal | Predicted Covid | Predicted Pneumonia |
+|---|---|---|---|
+| **True Normal** | 20 | 0 | 0 |
+| **True Covid** | 1 | 23 | 2 |
+| **True Viral Pneumonia** | 7 | 0 | 13 |
+
+**Per-class metrics**
+
+| Class | Precision | Recall | F1 |
+|---|---|---|---|
+| Normal | 71.4% | 100% | 83.3% |
+| Covid | 100% | 88.5% | 93.9% |
+| Pneumonia | 86.7% | 65.0% | 74.3% |
+
+![Confusion matrix](assets/confusion_matrix.png)
+
+**Training curves** (early stopped at ~epoch 17)
+
+![Training history](assets/training_history.png)
+
+> 📌 **Note on the résumé figure**: the original notebook run reported 95.65% on a different random split. The number above is the one actually produced by the current `train.py` on the user's local data split. If you are comparing splits, use the confusion matrix rather than a single scalar.
 
 ## Honest limitations
 
