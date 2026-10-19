@@ -57,8 +57,6 @@ dataset/
     └── Viral Pneumonia/
 ```
 
-notebook 通过 `flow_from_directory` 直接读取 `dataset/train_dataset` 与 `dataset/test_dataset`，类别固定为 `['Normal','Covid','Pneumonia']`。
-
 ## 目录结构
 
 ```
@@ -77,8 +75,6 @@ chest-xray-cnn/
 
 ## 快速开始
 
-**方式 A — 可运行脚本（推荐）：**
-
 ```bash
 pip install -r requirements.txt
 # 1. 按上面结构把数据放到 dataset/ 下
@@ -88,14 +84,6 @@ python train.py --data_root dataset
 python predict.py --image path/to/xray.jpg
 ```
 
-**方式 B — notebook（用于探索）：**
-
-```bash
-jupyter notebook chest_xray_cnn.ipynb
-# 运行全部单元格；末尾会打印测试准确率、训练曲线、分类报告和混淆矩阵
-```
-
-> `train.py` / `predict.py` 使用**英文**图例，避开了仅 Windows 自带的 SimHei 字体，因此可跨平台运行。探索性 notebook 保留原有的中文图例。
 
 ## 效果
 
@@ -131,12 +119,6 @@ jupyter notebook chest_xray_cnn.ipynb
 - `plt.rcParams['font.family'] = ['SimHei']` 依赖 **SimHei（黑体）** 字体，仅 Windows 自带。在 Linux/macOS/Colab 上需安装中文字体，或删掉这一行（图例会回退为英文）。
 - 只在单一固定划分上训练，未做 k 折交叉验证。
 - 没有用预训练骨干网络——ResNet 迁移学习基线大概率能超过这个从零训练的 CNN。
-
-## 接下来想做的
-
-- [ ] 换上 ResNet50 / EfficientNet 骨干并对比。
-- [ ] 加 Grad-CAM，展示模型关注肺部的哪些区域。
-- [ ] 导出训练好的模型，用 Gradio 包成可交互 demo。
 
 ---
 

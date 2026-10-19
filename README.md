@@ -57,8 +57,6 @@ dataset/
     └── Viral Pneumonia/
 ```
 
-The notebook reads `dataset/train_dataset` and `dataset/test_dataset` directly via `flow_from_directory`, with `classes=['Normal','Covid','Pneumonia']`.
-
 ## Project structure
 
 ```
@@ -77,8 +75,6 @@ chest-xray-cnn/
 
 ## Quick start
 
-**Option A — runnable scripts (recommended):**
-
 ```bash
 pip install -r requirements.txt
 # 1. put your data under dataset/ as shown above
@@ -87,16 +83,6 @@ python train.py --data_root dataset
 # 3. infer a single image
 python predict.py --image path/to/xray.jpg
 ```
-
-**Option B — the notebook (for exploration):**
-
-```bash
-jupyter notebook chest_xray_cnn.ipynb
-# run all cells; the final cells print test accuracy, a training curve,
-# a classification report and a confusion matrix
-```
-
-> `train.py` / `predict.py` use **English** plot labels and avoid the Windows-only SimHei font, so they run cross-platform. The exploratory notebook keeps the original Chinese labels.
 
 ## Results
 
@@ -133,11 +119,6 @@ jupyter notebook chest_xray_cnn.ipynb
 - Trained on a single fixed split; no k-fold cross-validation is reported.
 - No pre-trained backbone — a ResNet transfer-learning baseline would likely beat this from-scratch CNN.
 
-## What I'd do next
-
-- [ ] Swap in a ResNet50 / EfficientNet backbone and compare.
-- [ ] Add Grad-CAM to show which lung regions drive each prediction.
-- [ ] Export the trained model and wrap it in a small Gradio demo.
 
 ---
 
